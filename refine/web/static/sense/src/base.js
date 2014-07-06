@@ -15,7 +15,7 @@ function resetToValues(server, endpoint, method, data) {
 }
 
 function callES() {
-  sense.output.getSession().setValue('{ "__mode__" : "Calling Surfiki API...." }');
+  sense.output.getSession().setValue('{ "__mode__" : "Calling PyEsReduce API...." }');
 
   var es_server = $("#es_server").val(),
       es_endpoint = $("#es_endpoint").val(),
@@ -84,7 +84,7 @@ function init() {
     exec: reformat
   });
   sense.editor.commands.addCommand({
-    name: 'send to Surfiki API',
+    name: 'send to PyEsReduce API',
     bindKey: {win: 'Ctrl-Enter', mac: 'Command-Enter'},
     exec: callES
   });

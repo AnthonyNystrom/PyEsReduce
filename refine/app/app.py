@@ -9,7 +9,7 @@ from refine.app.handlers.healthcheck import HealthcheckHandler
 from refine.app.handlers.stream import StreamHandler
 from refine.app.utils import kls_import
 
-class SurfikiRefineServiceApp(tornado.web.Application):
+class PyEsReduceRefineServiceApp(tornado.web.Application):
 
     def __init__(self, redis, config, log_level):
         self.redis = redis
@@ -21,12 +21,12 @@ class SurfikiRefineServiceApp(tornado.web.Application):
             (r'/stream/(?P<job_key>.+)/?', StreamHandler),
         ]
 
-        self.redis.delete('surfiki::mappers')
+        self.redis.delete('PyEsReduce::mappers')
 
         self.load_input_streams()
         self.load_reducers()
 
-        super(SurfikiRefineServiceApp, self).__init__(handlers)
+        super(PyEsReduceRefineServiceApp, self).__init__(handlers)
 
     def load_input_streams(self):
         self.input_streams = {}

@@ -13,12 +13,12 @@ import tornado.ioloop
 from tornado.httpserver import HTTPServer
 import redis
 
-from refine.app.app import SurfikiRefineServiceApp
+from refine.app.app import PyEsReduceRefineServiceApp
 from refine.app.config import Config
 
 
 def main(arguments=None):
-    '''Runs Surfiki Refine server with the specified arguments.'''
+    '''Runs PyEsReduce Refine server with the specified arguments.'''
 
     parser = argparse.ArgumentParser(description='runs the application that processes stream requests for PyEsReduce')
     parser.add_argument('-b', '--bind', type=str, default='0.0.0.0', help='the ip that PyEsReduce will bind to')
@@ -38,18 +38,18 @@ def main(arguments=None):
 
     logging.basicConfig(level=getattr(logging, args.loglevel.upper()))
 
-    application = SurfikiRefineServiceApp(redis=c, config=cfg, log_level=args.loglevel.upper())
+    application = PyEsReduceRefineServiceApp(redis=c, config=cfg, log_level=args.loglevel.upper())
 
     server = HTTPServer(application)
     server.bind(args.port, args.bind)
     server.start(1)
 
     try:
-        logging.debug('Surfiki Refine service app running at %s:%d' % (args.bind, args.port))
+        logging.debug('PyEsReduce Refine service app running at %s:%d' % (args.bind, args.port))
         tornado.ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
         print
-        print "-- Surfiki Refine service app closed by user interruption --"
+        print "-- PyEsReduce Refine service app closed by user interruption --"
 
 if __name__ == "__main__":
     main(sys.argv[1:])

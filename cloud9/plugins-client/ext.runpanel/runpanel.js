@@ -545,7 +545,7 @@ module.exports = ext.register("ext/runpanel/runpanel", {
         if (ide.infraEnv)
             require("ext/docum" + "entation/documentation").show(page);
         else
-            window.open("https://docs.surfikirefine.com/" + page + ".html");
+            window.open("https://docs.PyEsReducerefine.com/" + page + ".html");
     },
 
     enable: function(){

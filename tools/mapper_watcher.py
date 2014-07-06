@@ -13,7 +13,7 @@ if __name__ == "__main__":
             filename = os.path.join(upload_foloder + jobtype, 'test_' + jobtype + '.py').encode("ascii")
             template = open(upload_foloder + "template/test_template.py").read()
             template = template.replace("JOBTYPE", jobtype)
-            mapper_content = open(upload_foloder + jobtype + "/surfiki_" + jobtype + "_mapper.py").read()
+            mapper_content = open(upload_foloder + jobtype + "/PyEsReduce_" + jobtype + "_mapper.py").read()
             mapper_content = mapper_content[mapper_content.find('def map'):]
             template = template.replace("MAPPER_CONTENT", mapper_content)
             file = open(filename, 'w')

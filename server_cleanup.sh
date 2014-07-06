@@ -13,7 +13,7 @@ for file in `ls /root/refine/jobs/refine`
 do
   if [[ "$file" != template ]]; then
     echo $file
-    redis-cli -p $port -a PyEsReduce sadd "surfiki::job-types" $file
-    redis-cli -p $port -a PyEsReduce set "surfiki::job-types::status::${file}" "INACTIVE" 
+    redis-cli -p $port -a PyEsReduce sadd "PyEsReduce::job-types" $file
+    redis-cli -p $port -a PyEsReduce set "PyEsReduce::job-types::status::${file}" "INACTIVE" 
   fi
 done

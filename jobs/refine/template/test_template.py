@@ -18,29 +18,29 @@ from collections import defaultdict
 from pyes import *
 from pyelasticsearch import *
 from pyelasticsearch.client import es_kwargs
-from surfiki_JOBTYPE_stream import SurfikiJOBTYPEStream
-from surfiki_JOBTYPE_reducer import SurfikiJOBTYPEReducer
+from PyEsReduce_JOBTYPE_stream import PyEsReduceJOBTYPEStream
+from PyEsReduce_JOBTYPE_reducer import PyEsReduceJOBTYPEReducer
 
 
-class SurfikiJOBTYPEMapper():
+class PyEsReduceJOBTYPEMapper():
     job_type = 'JOBTYPE'
     MAPPER_CONTENT
 
 
 def main():
     start = time.time()
-    hits = SurfikiJOBTYPEStream().process(None, None)
+    hits = PyEsReduceJOBTYPEStream().process(None, None)
     print "input stream took %.2f" % (time.time() - start)
     # for hit in hits:
                 # print hit['_source']['strKeywords']
     start = time.time()
-    mapper = SurfikiJOBTYPEMapper()
+    mapper = PyEsReduceJOBTYPEMapper()
     results = []
     results.append(mapper.map(hits))
     print "mapping took %.2f" % (time.time() - start)
 
     start = time.time()
-    SurfikiJOBTYPEReducer().reduce(None, results)
+    PyEsReduceJOBTYPEReducer().reduce(None, results)
     print "reducing took %.2f" % (time.time() - start)
 
 if __name__ == '__main__':

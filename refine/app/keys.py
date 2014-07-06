@@ -1,41 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-ALL_KEYS = 'surfiki::*'
+ALL_KEYS = 'PyEsReduce::*'
 
 # MAPPER KEYS
-MAPPERS_KEY = 'surfiki::mappers'
-MAPPER_INPUT_KEY = 'surfiki::jobs::%s::input'
-MAPPER_OUTPUT_KEY = 'surfiki::jobs::%s::%s::output'
-MAPPER_ERROR_KEY = 'surfiki::jobs::%s::errors'
-MAPPER_WORKING_KEY = 'surfiki::jobs::%s::working'
-LAST_PING_KEY = 'surfiki::mappers::%s::last-ping'
-WORKING_KEY = 'surfiki::mappers::%s::working'
+MAPPERS_KEY = 'PyEsReduce::mappers'
+MAPPER_INPUT_KEY = 'PyEsReduce::jobs::%s::input'
+MAPPER_OUTPUT_KEY = 'PyEsReduce::jobs::%s::%s::output'
+MAPPER_ERROR_KEY = 'PyEsReduce::jobs::%s::errors'
+MAPPER_WORKING_KEY = 'PyEsReduce::jobs::%s::working'
+LAST_PING_KEY = 'PyEsReduce::mappers::%s::last-ping'
+WORKING_KEY = 'PyEsReduce::mappers::%s::working'
 
 # JOB TYPES KEYS
-JOB_TYPES_KEY = 'surfiki::job-types'
-JOB_TYPES_ERRORS_KEY = 'surfiki::jobs::*::errors'
-JOB_TYPE_KEY = 'surfiki::job-types::%s'
-JOB_STATUS_KEY = 'surfiki::job-types::status::%s'
+JOB_TYPES_KEY = 'PyEsReduce::job-types'
+JOB_TYPES_ERRORS_KEY = 'PyEsReduce::jobs::*::errors'
+JOB_TYPE_KEY = 'PyEsReduce::job-types::%s'
+JOB_STATUS_KEY = 'PyEsReduce::job-types::status::%s'
 
 # LAST JOB RESULTS KEYS
-JOB_LAST_RESULT = 'surfiki::run::job::%s'
+JOB_LAST_RESULT = 'PyEsReduce::run::job::%s'
 
 # JOB PORT KEY
-JOB_PORT_KEY = 'surfiki::jobs::%s::port'
+JOB_PORT_KEY = 'PyEsReduce::jobs::%s::port'
 
 # STATS KEYS
-PROCESSED = 'surfiki::stats::processed'
-PROCESSED_SUCCESS = 'surfiki::stats::processed::success'
-PROCESSED_FAILED = 'surfiki::stats::processed::fail'
+PROCESSED = 'PyEsReduce::stats::processed'
+PROCESSED_SUCCESS = 'PyEsReduce::stats::processed::success'
+PROCESSED_FAILED = 'PyEsReduce::stats::processed::fail'
 
 # EDIT FILE KEY
-CURRENT_EDIT = 'surfiki::edit:current'
-CURRENT_CONTENT = 'surfiki::edit:currentcontent'
+CURRENT_EDIT = 'PyEsReduce::edit:current'
+CURRENT_CONTENT = 'PyEsReduce::edit:currentcontent'
 
 # JOB TEST RESULT KEY
-CURRENT_RESULT = 'surfiki::test::job::content'
-JOB_TEST = 'surfiki::test::job::run'
+CURRENT_RESULT = 'PyEsReduce::test::job::content'
+JOB_TEST = 'PyEsReduce::test::job::run'
 
 # ElasticSearch Endpoint setting
 ELASTIC_ENDPOINT = 'settings::endpoint'

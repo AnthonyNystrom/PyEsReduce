@@ -1,7 +1,7 @@
-Surfiki Sense
+PyEsReduce Sense
 =====
 
-A JSON aware interface for Surfiki. Comes with handy machinery such as syntax highlighting, autocomplete,
+A JSON aware interface for PyEsReduce. Comes with handy machinery such as syntax highlighting, autocomplete,
 formatting and code folding.
 
 

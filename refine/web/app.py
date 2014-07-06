@@ -364,9 +364,9 @@ def duplicateJob(old, new):
     #call(["cp", "-r", ddapp.config['UPLOAD_FOLDER'] + old + "/*", app.config['UPLOAD_FOLDER'] + new])
     subprocess.call("cp -r " + app.config['UPLOAD_FOLDER'] + old + "/* " + app.config['UPLOAD_FOLDER'] + new, shell=True)
     call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "test_" + old + ".py", app.config['UPLOAD_FOLDER'] + new + "/" + "test_" + new + ".py"])
-    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + old + "_stream.py", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_stream.py"])
-    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + old + "_mapper.py", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_mapper.py"])
-    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + old + "_reducer.py", app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_reducer.py"])
+    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + old + "_stream.py", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_stream.py"])
+    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + old + "_mapper.py", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_mapper.py"])
+    call(["mv", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + old + "_reducer.py", app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_reducer.py"])
 
     app.db.connection.sadd(JOB_TYPES_KEY, new)
     app.db.connection.set(JOB_STATUS_KEY % new, "INACTIVE")
@@ -375,17 +375,17 @@ def duplicateJob(old, new):
     template = template.replace(old, new)
     makeFile(config, template)
 
-    mapper = app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_mapper.py"
+    mapper = app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_mapper.py"
     template = open(mapper).read()
     template = template.replace(old, new)
     makeFile(mapper, template)
 
-    stream = app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_stream.py"
+    stream = app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_stream.py"
     template = open(stream).read()
     template = template.replace(old, new)
     makeFile(stream, template)
 
-    reducer = app.config['UPLOAD_FOLDER'] + new + "/" + "surfiki_" + new + "_reducer.py"
+    reducer = app.config['UPLOAD_FOLDER'] + new + "/" + "PyEsReduce_" + new + "_reducer.py"
     template = open(reducer).read()
     template = template.replace(old, new)
     makeFile(reducer, template)
@@ -401,29 +401,29 @@ def makeNormalFile(jobtype, name):
 
 def makeAppConfig(jobtype, desc):
     filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'app_config.py').encode("ascii")
-    streamdef = jobtype+'.surfiki_' + jobtype + '_stream' + '.Surfiki'+ jobtype + 'Stream'
-    reducerdef = jobtype+'.surfiki_' + jobtype + '_reducer' + '.Surfiki'+ jobtype + 'Reducer'
+    streamdef = jobtype+'.PyEsReduce_' + jobtype + '_stream' + '.PyEsReduce'+ jobtype + 'Stream'
+    reducerdef = jobtype+'.PyEsReduce_' + jobtype + '_reducer' + '.PyEsReduce'+ jobtype + 'Reducer'
     filecontent = '#!/usr/bin/python\n'+ '# -*- coding: utf-8 -*-\n\n#Desc'+desc+'\n'+'INPUT_STREAMS = [\n    \'' +streamdef+ '\']\n'+'REDUCERS = [\n    \''+reducerdef+'\']'
     makeFile(filename, filecontent)
 
 def makeStream(jobtype):
-    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'surfiki_' + jobtype + '_stream.py').encode("ascii")
+    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'PyEsReduce_' + jobtype + '_stream.py').encode("ascii")
     template = open(app.config['UPLOAD_FOLDER'] + "template/stream_template.py").read()
-    template = template.replace("CLASSNAME", "Surfiki"+ jobtype + "Stream")
+    template = template.replace("CLASSNAME", "PyEsReduce"+ jobtype + "Stream")
     template = template.replace("JOBTYPE", jobtype)
     makeFile(filename, template)
 
 def makeReducer(jobtype):
-    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'surfiki_' + jobtype + '_reducer.py').encode("ascii")
+    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'PyEsReduce_' + jobtype + '_reducer.py').encode("ascii")
     template = open(app.config['UPLOAD_FOLDER'] + "template/reducer_template.py").read()
-    template = template.replace("CLASSNAME", 'Surfiki'+ jobtype + 'Reducer')
+    template = template.replace("CLASSNAME", 'PyEsReduce'+ jobtype + 'Reducer')
     template = template.replace("JOBTYPE", jobtype)
     makeFile(filename, template)
 
 def makeMapper(jobtype):
-    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'surfiki_' + jobtype + '_mapper.py').encode("ascii")
+    filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'PyEsReduce_' + jobtype + '_mapper.py').encode("ascii")
     template = open(app.config['UPLOAD_FOLDER'] + "template/mapper_template.py").read()
-    template = template.replace("CLASSNAME", 'Surfiki'+ jobtype + 'Mapper')
+    template = template.replace("CLASSNAME", 'PyEsReduce'+ jobtype + 'Mapper')
     template = template.replace("JOBTYPE", jobtype)
     makeFile(filename, template)
 
@@ -431,7 +431,7 @@ def makeTestFile(jobtype):
     filename = os.path.join(app.config['UPLOAD_FOLDER'] + jobtype, 'test_' + jobtype + '.py').encode("ascii")
     template = open(app.config['UPLOAD_FOLDER'] + "template/test_template.py").read()
     template = template.replace("JOBTYPE", jobtype)
-    mapper_content = open(app.config['UPLOAD_FOLDER'] + jobtype + "/surfiki_" + jobtype + "_mapper.py").read()
+    mapper_content = open(app.config['UPLOAD_FOLDER'] + jobtype + "/PyEsReduce_" + jobtype + "_mapper.py").read()
     mapper_content = mapper_content[mapper_content.find('def map'):]
     template = template.replace("MAPPER_CONTENT", mapper_content)
     makeFile(filename, template)

@@ -41,7 +41,7 @@ def main(arguments=None):
 
     app.db = RedisDB(app)
     try:
-        logging.debug('Surfiki Refine web app running at %s:%d' % (args.bind, args.port))
+        logging.debug('PyEsReduce Refine web app running at %s:%d' % (args.bind, args.port))
         print(app.config)
         app.run(debug=args.debug, host=app.config['WEB_HOST'], port=app.config['WEB_PORT'])
     except KeyboardInterrupt:

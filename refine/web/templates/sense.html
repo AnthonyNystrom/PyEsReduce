@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Surfiki Sense - a JSON aware interface for Surfiki</title>
+    <title>PyEsReduce Sense - a JSON aware interface for PyEsReduce</title>
     <link href="{{ url_for('static', filename='sense/lib/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='sense/lib/jqueryui/jquery-ui-1.9.2.custom.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='sense/sense.css') }}" rel="stylesheet" type="text/css"/>
@@ -11,7 +11,7 @@
     <div class="navbar-inner">
         <form class="navbar-form pull-left">
             <input id="es_server" type="text" class="span3" value="{{ endpoint }}"/>
-            <input id="es_endpoint" type="text" class="span3" value="surfiki/_search/" data-provide="typeahead"/>
+            <input id="es_endpoint" type="text" class="span3" value="PyEsReduce/_search/" data-provide="typeahead"/>
             <select id="es_method" class="span2">
                 <option>GET</option>
                 <option selected='true'>POST</option>
