@@ -37,7 +37,7 @@ def main(arguments=None):
 
         app.config.from_pyfile(config_path, silent=False)
     else:
-        app.config.from_object('surfikiMR.web.config')
+        app.config.from_object('PyEsReduce.web.config')
 
     app.db = RedisDB(app)
     try:

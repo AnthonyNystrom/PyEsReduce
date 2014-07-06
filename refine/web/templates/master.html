@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="container infobox">
-        <p>Service Status: {{ g.server['surfikiMR_service_status'] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Active Mappers: {{ g.mappers|count }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Available Job Types: {{ g.job_types|count }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p>Service Status: {{ g.server['PyEsReduce_service_status'] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Active Mappers: {{ g.mappers|count }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Available Job Types: {{ g.job_types|count }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Running on {{ g.config['WEB_HOST'] }}:{{ g.config['WEB_PORT'] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Connected to Redis on {{ g.config['REDIS_HOST'] }}:{{ g.config['REDIS_PORT'] }}</p> <Br/>
         
         <div class="row">

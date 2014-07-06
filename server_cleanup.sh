@@ -8,12 +8,12 @@ function getPropertyFromFile()
 
 pkill python
 port=`getPropertyFromFile REDIS_PORT ./refine/web/config.py`
-redis-cli -p $port -a surfikiMR  KEYS "*" | xargs redis-cli -p $port -a surfikiMR DEL
+redis-cli -p $port -a PyEsReduce  KEYS "*" | xargs redis-cli -p $port -a PyEsReduce DEL
 for file in `ls /root/refine/jobs/refine`
 do
   if [[ "$file" != template ]]; then
     echo $file
-    redis-cli -p $port -a surfikiMR sadd "surfiki::job-types" $file
-    redis-cli -p $port -a surfikiMR set "surfiki::job-types::status::${file}" "INACTIVE" 
+    redis-cli -p $port -a PyEsReduce sadd "surfiki::job-types" $file
+    redis-cli -p $port -a PyEsReduce set "surfiki::job-types::status::${file}" "INACTIVE" 
   fi
 done

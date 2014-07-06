@@ -170,8 +170,8 @@ def allowed_file(filename):
 
 def server_context():
     return {
-        'surfikiMR_service_status': 'running',
-        'surfikiMR_version': __version__
+        'PyEsReduce_service_status': 'running',
+        'PyEsReduce_version': __version__
     }
 
 @app.before_request
@@ -583,10 +583,10 @@ def start():
         classone = filename[:-3]
         mapperclass = classone+"."+classtwo
         # Start the App in backgorund process
-        subprocess.Popen('python refine/app/server.py --redis-port='+ str(app.config['REDIS_PORT']) + ' -p '+ job_port(jobtype) + ' --redis-pass=surfikiMR --config-file=jobs/refine/' + jobtype + '/app_config.py', shell=True,stdout=PIPE)
+        subprocess.Popen('python refine/app/server.py --redis-port='+ str(app.config['REDIS_PORT']) + ' -p '+ job_port(jobtype) + ' --redis-pass=PyEsReduce --config-file=jobs/refine/' + jobtype + '/app_config.py', shell=True,stdout=PIPE)
         # Start all the mappers in background process
         for num in range(1, int(counts)+1):
-            subprocess.Popen('python refine/worker/mapper.py --mapper-key=map-key-'+jobtype+str(num) + ' --mapper-class='+jobtype+'.'+mapperclass+' --redis-port='+ str(app.config['REDIS_PORT']) + ' --redis-pass=surfikiMR', shell=True,stdout=PIPE)
+            subprocess.Popen('python refine/worker/mapper.py --mapper-key=map-key-'+jobtype+str(num) + ' --mapper-class='+jobtype+'.'+mapperclass+' --redis-port='+ str(app.config['REDIS_PORT']) + ' --redis-pass=PyEsReduce', shell=True,stdout=PIPE)
         app.db.connection.set(JOB_STATUS_KEY % jobtype, "READY")
         return redirect("%s%s" % (url_for('index'), "#tab-jobs"))
     return render_template('run_job.html')
