@@ -10,19 +10,38 @@ import flask, os, sys, time, psutil, json, socket
 from tornado.ioloop import IOLoop
 from tornado.httpserver import HTTPServer
 from tornado.wsgi import WSGIContainer
-
+from flask.ext.httpauth import HTTPDigestAuth
 from flask import Flask, render_template, g, redirect, request, url_for
 from ujson import loads
 from subprocess import *
+from datetime import timedelta
 from functools import wraps
-from flask import request, Response
+from flask import request, Response, session
 from werkzeug import secure_filename
 from refine.version import __version__
 from refine.app.utils import flush_dead_mappers
 from refine.app.keys import MAPPERS_KEY, JOB_STATUS_KEY, JOB_TYPES_KEY, JOB_TYPE_KEY, LAST_PING_KEY, MAPPER_ERROR_KEY, MAPPER_WORKING_KEY, JOB_TYPES_ERRORS_KEY, ALL_KEYS, PROCESSED, PROCESSED_FAILED, CURRENT_EDIT, CURRENT_CONTENT, CURRENT_RESULT, JOB_TEST, ELASTIC_ENDPOINT
 
 ALLOWED_EXTENSIONS = set(['tar', 'py'])
+
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'PyEsReduce'
+
+app.permanent_session_lifetime = timedelta(seconds=300)
+
+auth = HTTPDigestAuth()
+
+# The users and credentials we are using for Http Basic Auth on the project
+users = {
+    "admin": "Rene91970Tony6472"
+}
+
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
 
 def job_desc(type):
     f = open(app.config['UPLOAD_FOLDER'] + type + "/app_config.py")
@@ -285,7 +304,14 @@ def get_errors():
     return errors
 
 @app.route("/")
+@auth.login_required
 def index():
+    
+    # For the timeout/session lifetime config to work we need
+    # to make the sessions permanent. It's false by default
+    # +INFO: http://flask.pocoo.org/docs/api/#flask.session.permanent
+    session.permanent = True
+
     error_queues = app.db.connection.keys(JOB_TYPES_ERRORS_KEY)
 
     has_errors = False
