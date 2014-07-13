@@ -340,7 +340,7 @@ def index():
             'type': key_type
         })
 
-    return render_template('index.html', failed_warning=has_errors, keys=keys, info=app.db.connection.info(), endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
+    return render_template('index.html', failed_warning=has_errors, keys=keys, info=app.db.connection.info())
 
 @app.route('/ace', methods=['GET', 'POST'])
 def ace():
@@ -644,21 +644,21 @@ def delete_failed(job_id):
 def job_types():
     return render_template('job-types.html')
 
-@app.route('/configuration', methods=['GET', 'POST'])
-def configuration():
-    if request.method == 'POST':
-        app.db.connection.set(ELASTIC_ENDPOINT, request.form['endpoint'])
-        return redirect("%s%s" % (url_for('index'), "#tab-configuration"))
-    else:
-        return render_template('configuration.html', info=app.db.connection.info(), endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
+#@app.route('/configuration', methods=['GET', 'POST'])
+#def configuration():
+#    if request.method == 'POST':
+#        app.db.connection.set(ELASTIC_ENDPOINT, request.form['endpoint'])
+#        return redirect("%s%s" % (url_for('index'), "#tab-configuration"))
+#    else:
+#        return render_template('configuration.html', info=app.db.connection.info(), endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
 
-@app.route('/paramedic.js', methods=['GET'])
-def paramedic():
-    return render_template('paramedic.js', endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
+#@app.route('/paramedic.js', methods=['GET'])
+#def paramedic():
+#    return render_template('paramedic.js', endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
 
-@app.route('/sense', methods=['GET'])
-def sense():
-    return render_template('sense.html', endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
+#@app.route('/sense', methods=['GET'])
+#def sense():
+#    return render_template('sense.html', endpoint=app.db.connection.get(ELASTIC_ENDPOINT))
 
 @app.route("/stats")
 def stats():

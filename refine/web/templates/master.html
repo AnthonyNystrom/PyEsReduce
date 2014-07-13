@@ -31,7 +31,7 @@
       </div>
       <div class="container">
         <ul class="nav">
-        <li class="logo"><a href="/"><img src="{{ url_for('static', filename='img/PyEsReduce-logo.png') }}" style="height: 35px;"></a> </li>
+
         </ul>
       </div>
     </div>
@@ -163,8 +163,7 @@
             <li class="active"><a href={% if "index" == request.endpoint %}"#main" data-toggle="tab"{% else %}"/#tab-main"{% endif %}>Jobs In Progress</a></li>
             <li><a href={% if "index" == request.endpoint %}"#jobs" data-toggle="tab"{% else %}"/#tab-jobs"{% endif %}>Jobs</a></li>
             <li><a href={% if "index" == request.endpoint %}"#details" data-toggle="tab"{% else %}"/#tab-details"{% endif %}>Details</a></li>
-            <li><a href={% if "index" == request.endpoint %}"#elastic" data-toggle="tab"{% else %}"/#tab-elastic"{% endif %}>Elasticsearch</a></li>
-            <li><a href={% if "index" == request.endpoint %}"#configuration" data-toggle="tab"{% else %}"/#tab-configuration"{% endif %}>Configuration</a></li>
+            <li><a href={% if "index" == request.endpoint %}"#configuration" data-toggle="tab"{% else %}"/#tab-configuration"{% endif %}>Configuration</a></li> 
           </ul>
           
           {% block body %}
@@ -176,16 +175,6 @@
   </div>
   
   <div id="footer" class="navbar">
-   <!-- <div class="navbar-inner">
-      <a href="http://www.intridea.com" class="brand"><img alt="Intridea, Inc." src="{{ url_for('static', filename='img/intridea_logo.png') }}" style="height: 35px;padding: 5px 50px 5px 15px;"></a>
-      <ul class="nav hidden-phone">
-        <li><a href="http://www.intridea.com">&copy; 2013 Intridea, Inc.</a></li>
-        <li><a href="http://www.intridea.com">www.intridea.com</a></li>
-        <li><a href="http://www.PyEsReduce.com/contact">Contact</a></li>
-        <li><a href="http://twitter.com/intridea">Twitter</a></li>
-        <li><a href="http://facebook.com/intridea">Facebook</a></li>
-      </ul> 
-    </div> --> 
   </div> 
   
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}" charset="utf-8"></script>
