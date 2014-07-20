@@ -4,6 +4,7 @@
 
 import os
 from os.path import abspath, dirname, join
+from time import gmtime, strftime
 import httplib
 import time
 import json
@@ -42,7 +43,9 @@ for line in fp.readlines():
         port = line.split("=")[1].strip()
 fp.close()
 
-os.popen('python refine/web/server.py --redis-port='+port+' --redis-pass=PyEsReduce --config-file=./refine/web/config.py &')
+currentTime = strftime("%Y-%m-%d", gmtime())
+os.popen('python refine/web/server.py --redis-port={port} --redis-pass=PyEsReduce' \
+    ' --config-file=./refine/web/config.py > /var/log/PyEsReduce/PyESRefine_{currentTime}.log 2>&1 &'.format(port=port, currentTime=currentTime))
 f = open("/var/spool/cron/crontabs/root")
 for line in f.readlines():
     line = str(line.strip('\n'))
